@@ -1,0 +1,9 @@
+name: KitPVP
+author: Finn
+main: me.finn.kitpvp.KitPVP
+version: 1.0.0
+
+api-version: 1.16
+commands:
+  kitpvp:
+    aliases: [kp]
