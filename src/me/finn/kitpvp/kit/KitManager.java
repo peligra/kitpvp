@@ -31,12 +31,14 @@ public class KitManager {
     public Kit newKit(String displayName) {
         Kit kit = new Kit();
         kit.setDisplayName(displayName);
-        String decolored = Colorize.stripColor(Colorize.color(displayName));
-        kit.setName(decolored.toLowerCase().replace(" ", "_"));
+        kit.setName(Colorize.removeColorNotation(displayName)
+                .toLowerCase()
+                .replace(" ", "_"));
         return kit;
     }
 
     public void deleteKit(Kit kit) {
+        pl.kits.remove(kit);
         pl.cm.deleteKit(kit);
     }
 

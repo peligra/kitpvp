@@ -10,5 +10,8 @@ public class Colorize {
     public static String stripColor(String s) {
         return ChatColor.stripColor(s);
     }
+    public static String removeColorNotation(String s) {
+        return stripColor(color(s));
+    }
 
 }
