@@ -75,7 +75,7 @@ public class ChatInput {
 
                 e.setCancelled(true);
                 Bukkit.getScheduler().runTask(pl, () -> {
-                    final Response response = waiting.get(p).completeFunction.apply(p, message);
+                    final Response response = builder.completeFunction.apply(p, message);
                     if (response.getText() != null) {
                         new Builder(p)
                                 .title(response.getText())
