@@ -4,11 +4,8 @@ import me.finn.kitpvp.KitPVP;
 import me.finn.kitpvp.utils.Colorize;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
 public class KitManager {
@@ -65,7 +62,7 @@ public class KitManager {
 
     public void deleteKit(Kit kit) {
         pl.kits.remove(kit);
-        pl.cm.deleteKit(kit);
+        pl.kc.deleteKit(kit);
     }
 
     public void preparePlayer(Player p) {

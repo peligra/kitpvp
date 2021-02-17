@@ -4,6 +4,7 @@ import me.finn.kitpvp.KitPVP;
 import me.finn.kitpvp.command.subcommands.ClearSub;
 import me.finn.kitpvp.command.subcommands.CreateSub;
 import me.finn.kitpvp.command.subcommands.SelectorSub;
+import me.finn.kitpvp.command.subcommands.SetSpawnSub;
 import me.finn.kitpvp.guisystem.guis.OverviewGUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,6 +26,7 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
         subcommands.add(new CreateSub());
         subcommands.add(new ClearSub());
         subcommands.add(new SelectorSub());
+        subcommands.add(new SetSpawnSub());
     }
 
     @Override
@@ -50,7 +52,8 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
         }
 
         if (!p.hasPermission(sub.getPermission())) {
-            p.sendMessage("You don't have permission to use this function!");
+            p.sendMessage("You don't have permission to use this command!");
+            return true;
         }
 
         List<String> arguments = new ArrayList<>(Arrays.asList(args));

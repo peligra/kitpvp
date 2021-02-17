@@ -22,13 +22,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class ConfigManager {
+public class KitsConfig {
 
     private KitPVP pl;
     private final FileConfiguration kitsConfiguration;
     private final File kitsFile;
 
-    public ConfigManager(KitPVP pl) {
+    public KitsConfig(KitPVP pl) {
         this.pl = pl;
 
         // gets files and actual config

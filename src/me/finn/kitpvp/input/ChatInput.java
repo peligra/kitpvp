@@ -95,7 +95,7 @@ public class ChatInput {
     public static class Response {
 
         private final String text;
-        private boolean retry = false;
+        private boolean retry;
         private Response(String text, Boolean retry) {
             this.text = text;
             this.retry = retry;
