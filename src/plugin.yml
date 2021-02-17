@@ -9,7 +9,7 @@ commands:
     aliases: [kp]
 
 permissions:
-  kitpvp.kits.clear:
-  kitpvp.kits.create:
   kitpvp.selector:
+    description: Allows access directly to selector.
   kitpvp.setspawn:
+    description: Allows a player to set the kitpvp spawn location.

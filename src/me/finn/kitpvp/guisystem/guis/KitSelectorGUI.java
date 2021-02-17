@@ -62,7 +62,7 @@ public class KitSelectorGUI extends GUI {
 
             if (kit != null) {
                 p.closeInventory();
-                pl.gm.join(p, kit);
+                pl.gm.selectKit(p, kit);
             }
         }
     }

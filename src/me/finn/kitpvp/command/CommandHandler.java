@@ -1,8 +1,6 @@
 package me.finn.kitpvp.command;
 
 import me.finn.kitpvp.KitPVP;
-import me.finn.kitpvp.command.subcommands.ClearSub;
-import me.finn.kitpvp.command.subcommands.CreateSub;
 import me.finn.kitpvp.command.subcommands.SelectorSub;
 import me.finn.kitpvp.command.subcommands.SetSpawnSub;
 import me.finn.kitpvp.guisystem.guis.OverviewGUI;
@@ -23,8 +21,6 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
 
     public CommandHandler(KitPVP pl) {
         this.pl = pl;
-        subcommands.add(new CreateSub());
-        subcommands.add(new ClearSub());
         subcommands.add(new SelectorSub());
         subcommands.add(new SetSpawnSub());
     }
