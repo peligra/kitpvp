@@ -2,10 +2,13 @@ package me.finn.kitpvp.kit;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.libs.it.unimi.dsi.fastutil.Hash;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Kit {
 
@@ -14,7 +17,7 @@ public class Kit {
     private String description = "&r&7Default description.";
     private Integer price = 0;
     private Material icon = Material.IRON_SWORD;
-    private Inventory inv;
+    private HashMap<Integer, ItemStack> items = new HashMap<>();
     private ArrayList<PotionEffect> effects = new ArrayList<>();
 
     public void setName(String name) {
@@ -32,9 +35,6 @@ public class Kit {
     public void setIcon(Material icon) {
         this.icon = icon;
     }
-    public void setInv(Inventory inv) {
-        this.inv = inv;
-    }
 
     public String getName() {
         return name;
@@ -51,8 +51,8 @@ public class Kit {
     public Material getIcon() {
         return icon;
     }
-    public Inventory getInv() {
-        return inv;
+    public HashMap<Integer, ItemStack> getItems() {
+        return items;
     }
     public ArrayList<PotionEffect> getEffects() {
         return effects;

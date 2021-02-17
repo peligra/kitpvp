@@ -34,7 +34,7 @@ public class CreateSub extends SubCommand {
         }
 
         Kit kit = pl.km.newKit(name);
-        kit.setInv(p.getInventory());
+        pl.km.setItemsFromInventory(p, kit);
         pl.kits.add(kit);
     }
 

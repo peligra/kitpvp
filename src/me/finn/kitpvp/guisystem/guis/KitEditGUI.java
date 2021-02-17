@@ -125,7 +125,20 @@ public class KitEditGUI extends GUI {
                         return ChatInput.Response.close();
                     }).run();
         } else if (mat == Material.GOLD_INGOT) {
-            p.sendMessage("jhi");
+            new ChatInput.Builder(p).plugin(pl)
+                    .title("&a&lSet Price")
+                    .subtitle("&7Type name in chat!")
+                    .onComplete((player, s) -> {
+                        if (!isNumeric(s)) {
+                            return ChatInput.Response.retry("&c&lPlease enter a number!");
+                        }
+
+                        Integer price = Integer.valueOf(s);
+
+                        kit.setPrice(price);
+                        new KitEditGUI(playerMenuUtility, kit, pl).open();
+                        return ChatInput.Response.close();
+                    }).run();
         } else if (mat == Material.POTION) {
             p.sendMessage("jhi");
         } else if (mat == Material.OAK_SIGN) {
@@ -157,6 +170,18 @@ public class KitEditGUI extends GUI {
         }
 
         return null;
+    }
+
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
 }

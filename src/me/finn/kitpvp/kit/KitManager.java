@@ -4,7 +4,11 @@ import me.finn.kitpvp.KitPVP;
 import me.finn.kitpvp.utils.Colorize;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
 public class KitManager {
@@ -41,9 +45,22 @@ public class KitManager {
         return kit;
     }
 
+    public void setItemsFromInventory(Player p, Kit kit) {
+        for (int i = 0; i < p.getInventory().getSize(); i++) {
+            if (p.getInventory().getContents()[i] != null) {
+                ItemStack itemStack = p.getInventory().getContents()[i];
+                // clone item stack else clearing of inventory will update kit items
+                kit.getItems().put(i, itemStack.clone());
+            }
+        }
+    }
+
     public void equipKit(Player p, Kit kit) {
         preparePlayer(p);
-        p.getInventory().setContents(kit.getInv().getContents());
+        for (Integer key : kit.getItems().keySet()) {
+            ItemStack item = kit.getItems().get(key);
+            p.getInventory().setItem(key, item);
+        }
     }
 
     public void deleteKit(Kit kit) {

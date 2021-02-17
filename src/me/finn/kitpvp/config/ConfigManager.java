@@ -9,6 +9,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.craftbukkit.libs.it.unimi.dsi.fastutil.Hash;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -19,6 +20,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class ConfigManager {
 
@@ -87,9 +89,9 @@ public class ConfigManager {
         ConfigurationSection items = section.getConfigurationSection("items");
 
         if (items != null) {
-            Inventory inv = Bukkit.createInventory(null, InventoryType.PLAYER);
-            for (String itemName : items.getKeys(false)) {
-                ConfigurationSection itemSection = items.getConfigurationSection(itemName);
+            HashMap<Integer, ItemStack> kitItems = new HashMap<>();
+            for (String itemIndex : items.getKeys(false)) {
+                ConfigurationSection itemSection = items.getConfigurationSection(itemIndex);
 
                 ItemStack item = new ItemStack(
                         Material.getMaterial(itemSection.getString("material")),
@@ -111,10 +113,8 @@ public class ConfigManager {
                 }
 
                 item.setItemMeta(meta);
-                inv.setItem(Integer.valueOf(itemName), item);
+                kit.getItems().put(Integer.valueOf(itemIndex), item);
             }
-
-            kit.setInv(inv);
         }
 
         pl.kits.add(kit);
@@ -144,14 +144,12 @@ public class ConfigManager {
         }
 
         // create items section if there any any
-        if (kit.getInv() != null && kit.getInv().getContents().length != 0) {
+        if (!kit.getItems().isEmpty()) {
             ConfigurationSection items = section.createSection("items");
 
-            for (int i = 0; i < kit.getInv().getSize(); i++) {
-                ItemStack item = kit.getInv().getItem(i);
-                if (item != null) {
-                    addItem(items.createSection(String.valueOf(i)), item);
-                }
+            for (Integer key : kit.getItems().keySet()) {
+                ItemStack item = kit.getItems().get(key);
+                addItem(items.createSection(String.valueOf(key)), item);
             }
         }
         saveConfig();

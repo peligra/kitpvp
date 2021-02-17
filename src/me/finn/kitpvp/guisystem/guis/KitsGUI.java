@@ -14,7 +14,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class KitsGUI extends GUI {
@@ -69,7 +68,7 @@ public class KitsGUI extends GUI {
         if (mat == Material.FEATHER) {
             int number = ThreadLocalRandom.current().nextInt(1000, 9999 + 1);
             Kit kit = pl.km.newKit("Kit " + number);
-            kit.setInv(p.getInventory());
+            pl.km.setItemsFromInventory(p, kit);
             pl.kits.add(kit);
             new KitEditGUI(KitPVP.getPlayerMenuUtility(p), kit, pl).open();
         } else if (mat == Material.OAK_SIGN) {
