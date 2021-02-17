@@ -116,8 +116,8 @@ public class KitEditGUI extends GUI {
                     .onComplete((player, s) -> {
                         Material icon = getMaterial(s);
 
-                        if (s == null) {
-                            return ChatInput.Response.retry("&c&lInvalid Icon!");
+                        if (icon == null) {
+                            return ChatInput.Response.retry("&cInvalid material name!");
                         }
 
                         kit.setIcon(icon);
@@ -130,7 +130,7 @@ public class KitEditGUI extends GUI {
                     .subtitle("&7Type name in chat!")
                     .onComplete((player, s) -> {
                         if (!isNumeric(s)) {
-                            return ChatInput.Response.retry("&c&lPlease enter a number!");
+                            return ChatInput.Response.retry("&cPlease enter a number!");
                         }
 
                         Integer price = Integer.valueOf(s);

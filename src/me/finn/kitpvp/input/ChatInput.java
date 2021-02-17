@@ -51,7 +51,7 @@ public class ChatInput {
 
         public void run() {
             target.closeInventory();
-            target.sendTitle(Colorize.color(title), Colorize.color(subtitle), 0, 100, 0);
+            target.sendTitle(Colorize.color(title), Colorize.color(subtitle), 0, Integer.MAX_VALUE, 0);
             waiting.put(target, this);
         }
 
@@ -76,14 +76,16 @@ public class ChatInput {
                 e.setCancelled(true);
                 Bukkit.getScheduler().runTask(pl, () -> {
                     final Response response = builder.completeFunction.apply(p, message);
-                    if (response.getText() != null) {
+                    waiting.remove(p);
+                    p.resetTitle();
+                    if (response.isRetry()) {
                         new Builder(p)
                                 .title(response.getText())
                                 .subtitle("&7Please try again!")
                                 .plugin(pl)
-                                .onComplete(builder.completeFunction).run();
+                                .onComplete(builder.completeFunction)
+                                .run();
                     }
-                    waiting.remove(p);
                 });
             }
         }
@@ -93,18 +95,23 @@ public class ChatInput {
     public static class Response {
 
         private final String text;
-        private Response(String text) {
+        private boolean retry = false;
+        private Response(String text, Boolean retry) {
             this.text = text;
+            this.retry = retry;
         }
 
         public String getText() {
             return text;
         }
+        public boolean isRetry() {
+            return retry;
+        }
         public static Response close() {
-            return new Response(null);
+            return new Response(null, false);
         }
         public static Response retry(String message) {
-            return new Response(message);
+            return new Response(message, true);
         }
 
     }
